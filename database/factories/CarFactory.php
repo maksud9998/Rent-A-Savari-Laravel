@@ -27,7 +27,7 @@ class CarFactory extends Factory
         return [
             'car_name' => $car_name,
             'car_slug' => $slug,
-            'car_image' => 'digital' . $this->faker->unique()->numberBetween(1, 22),
+            'car_image' => 'digital' . $this->faker->unique()->numberBetween(1, 22) . 'jpg',
             'car_no_plate' => $this->faker->text(10),
             'body_type' => $this->faker->text(10),
             'seat_capacity' => $this->faker->numberBetween(2, 7),
