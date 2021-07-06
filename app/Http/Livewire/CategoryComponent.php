@@ -7,7 +7,7 @@ use App\Models\Category;
 use Livewire\Component;
 use Livewire\WithPagination;
 use Cart;
-class ShopComponent extends Component
+class CategoryComponent extends Component
 
 {
 
@@ -15,11 +15,13 @@ class ShopComponent extends Component
 
     public $sorting;
     public $pagesize;
+    public $category_slug;
 
-        public function mount()
+        public function mount($category_slug)
         {
             $this->sorting = "default";
             $this->pagesize = "13";
+            $this->category_slug = $category_slug;
         }
 
 
@@ -34,27 +36,34 @@ class ShopComponent extends Component
 
     use WithPagination;
     public function render()
-    {       
+    {     
+            $category = Category::where('slug',$this->category_slug)->first();
+            $category_id = $category->id;
+            $category_name = $category->name;
+            
+
+
+
             if($this->sorting=='date')
             {
 
-                $cars = Car::orderBy('created_at','DESC')->paginate($this->pagesize);
+                $cars = Car::where('category_id',$category_id)->orderBy('created_at','DESC')->paginate($this->pagesize);
             }
             else if($this->sorting=="price")
             {
-                $cars = Car::orderBy('rent_price','ASC')->paginate($this->pagesize);
+                $cars = Car::where('category_id',$category_id)->orderBy('rent_price','ASC')->paginate($this->pagesize);
             }
             else if($this->sorting=="price-desc")
             {
-                $cars = Car::orderBy('rent_price','DESC')->paginate($this->pagesize);
+                $cars = Car::where('category_id',$category_id)->orderBy('rent_price','DESC')->paginate($this->pagesize);
             }
             else
             {
-                $cars = Car::paginate($this->pagesize);
+                $cars = Car::where('category_id',$category_id)->paginate($this->pagesize);
             }
 
             $categories = Category::all();
 
-        return view('livewire.shop-component',['cars'=>$cars,'categories'=> $categories])->layout("layouts.base");
+        return view('livewire.category-component',['cars'=>$cars,'categories'=> $categories,'category_name'=>$category_name])->layout("layouts.base");
     }
 }
