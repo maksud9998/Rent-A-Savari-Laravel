@@ -18,7 +18,7 @@ class ShopComponent extends Component
         public function mount()
         {
             $this->sorting = "default";
-            $this->pagesize = "12";
+            $this->pagesize = "13";
         }
 
 
@@ -39,11 +39,11 @@ class ShopComponent extends Component
 
                 $cars = Car::orderBy('created_at','DESC')->paginate($this->pagesize);
             }
-            else if($this->sorting=='price')
+            else if($this->sorting=="price")
             {
                 $cars = Car::orderBy('rent_price','ASC')->paginate($this->pagesize);
             }
-            else if($this->sorting=='price-desc')
+            else if($this->sorting=="price-desc")
             {
                 $cars = Car::orderBy('rent_price','DESC')->paginate($this->pagesize);
             }
