@@ -6,6 +6,7 @@ use App\Http\Livewire\CategoryComponent;
 use App\Http\Livewire\CheckoutComponent;
 use App\Http\Livewire\DetailsComponent;
 use App\Http\Livewire\HomeComponent;
+use App\Http\Livewire\SearchComponent;
 use App\Http\Livewire\ShopComponent;
 use App\Http\Livewire\User\UserDashboardComponent;
 use Illuminate\Support\Facades\Route;
@@ -29,6 +30,7 @@ Route::get('/cart', CartComponent::class)->name('car.cart');
 Route::get('/checkout', CheckoutComponent::class);
 Route::get('/car/{slug}', DetailsComponent::class)->name('car.details');
 Route::get('/car-category/{category_slug}', CategoryComponent::class)->name('car.category');
+Route::get('/search', SearchComponent::class)->name('car.search');
 
 
 // Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
